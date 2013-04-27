@@ -1,6 +1,7 @@
 package me.jack.ld26.Entity;
 
 import me.jack.ld26.Level.Level;
+import me.jack.ld26.Utils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.GameContainer;
@@ -8,6 +9,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
+import org.newdawn.slick.geom.Vector2f;
 
 /**
  * Author: Jack
@@ -92,12 +94,8 @@ public class EntityPlayer extends Entity {
         if(Mouse.isButtonDown(0)){
             int mX = i.getMouseX();
             int mY = i.getMouseY();
-            float xSpeed = mX - x;
-            float ySpeed = mY - y;
-            float factor = (float)(9/Math.sqrt(xSpeed * xSpeed + ySpeed*ySpeed));
-            xSpeed = xSpeed * factor;
-            ySpeed = ySpeed*factor;
-                level.addEntity(new EntityPlayerProjectile(x,y,xSpeed,ySpeed));
+            Vector2f speed= Utils.getSpeed(mX,x,mY,y,9);
+            level.addEntity(new EntityPlayerProjectile(x,y,speed.getX(),speed.getY()));
 
 
         }

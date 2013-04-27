@@ -2,6 +2,7 @@ package me.jack.ld26;
 
 import me.jack.ld26.Entity.EntityPlayer;
 import me.jack.ld26.Level.Level;
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 
 /**
@@ -24,6 +25,9 @@ public class LD26Game extends BasicGame{
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
         level.update(gameContainer);
+        if(Mouse.isButtonDown(0)){
+            System.out.println(gameContainer.getInput().getMouseX() + " " + gameContainer.getInput().getMouseY());
+        }
     }
 
     @Override
