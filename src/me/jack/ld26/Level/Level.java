@@ -69,12 +69,18 @@ public class Level {
             if(move.getShape().intersects(player.getShape()))
                 return false;
         }
-
         if(!(move instanceof EntityTower)){
             if(move.getShape().intersects(move.getShape()))
                 return false;
         }
-
+        if(move.getShape().intersects(left))
+            return false;
+        if(move.getShape().intersects(right))
+            return false;
+        if(move.getShape().intersects(top))
+            return false;
+        if(move.getShape().intersects(bottom))
+            return false;
         return true;
 
     }
