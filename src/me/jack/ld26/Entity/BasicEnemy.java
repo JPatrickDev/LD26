@@ -94,8 +94,10 @@ public class BasicEnemy extends Entity {
             die(l);
         }
 
-        if(e instanceof EntityPlayer)
+        if(e instanceof EntityPlayer){
+            l.player.health-=5;
             die(l);
+        }
         if (e instanceof EntityPlayerProjectile) {
             if (l.towerPower >= 100) {
                 l.towerPower = 100;

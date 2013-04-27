@@ -20,6 +20,8 @@ public class EntityPlayer extends Entity {
 
     private static final float RADIUS = 16;
 
+
+    public int health = 100;
     public EntityPlayer(int x, int y) {
         super(x, y);
     }

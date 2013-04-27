@@ -35,6 +35,8 @@ public class Level {
     Image towerPowerEnd = null;
     Animation towerPowerAnim = null;
 
+    Image healthEnd = null;
+
     public void init() {
         player = new EntityPlayer(400, 200);
         player.spawn();
@@ -43,6 +45,7 @@ public class Level {
         tower.spawn();
         try {
             towerPowerEnd = new Image("/res/barEnd.png");
+            healthEnd = new Image("/res/healthEnd.png");
             SpriteSheet sheet = new SpriteSheet("/res/barEndAnim.png",10,5);
             towerPowerAnim = new Animation();
             towerPowerAnim.addFrame(sheet.getSprite(0,0),500);
@@ -74,7 +77,11 @@ public class Level {
 
         g.setColor(Color.red);
         g.fillRect(20,50,tower.health,5);
-        g.drawImage(towerPowerEnd,20+tower.health,50);
+        g.drawImage(healthEnd,20+tower.health,50);
+
+        g.setColor(Color.red);
+        g.fillRect(20,60,player.health,5);
+        g.drawImage(healthEnd,20+player.health,60);
         g.setColor(Color.white);
     }
 
