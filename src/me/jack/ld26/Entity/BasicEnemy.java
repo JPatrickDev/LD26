@@ -90,7 +90,7 @@ public class BasicEnemy extends Entity {
             die(l);
         }
         if (e instanceof EntityTower){
-            l.tower.health--;
+            l.tower.health-=5;
             die(l);
         }
 
