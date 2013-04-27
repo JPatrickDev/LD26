@@ -1,0 +1,22 @@
+IDEAS
+LD26
+THEME:MINIMALISM
+
+THE ONE THEME I DID NOT WANT - Its growing on me now
+
+================================
+Simple island explorer with black and white graphics? --- Find all the chests, that sort of thing
+
+    -Very simple UI
+    -Minimal amount of tiles?
+    - Only 1-2 bad guys?
+-------------------------------------------------------------------------------------------------
+Basic platformer?
+
+
+Basic shooter?**********************************
+----
+
+- pure black and white defend the island, no art, just rects and circles?
+ - Player is a square, and has to defend a triangle in the center of the map from the circles attacking him.?
+ -Very basic sound effects.
