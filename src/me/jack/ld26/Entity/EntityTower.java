@@ -1,6 +1,7 @@
 package me.jack.ld26.Entity;
 
 import me.jack.ld26.Level.Level;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
@@ -19,7 +20,7 @@ public class EntityTower extends Entity{
     }
 
     @Override
-    public void update(Level level) {
+    public void update(Level level,GameContainer arg0) {
 angle+=1;
     }
 

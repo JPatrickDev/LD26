@@ -1,6 +1,7 @@
 package me.jack.ld26.Entity;
 
 import me.jack.ld26.Level.Level;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
@@ -14,14 +15,20 @@ public abstract class Entity {
     protected Shape shape;
     protected int xVelocity,yVelocity;
 
+    private boolean dead = false;
     public Entity(int x,int y){
         this.x = x;
         this.y = y;
     }
 
-    public abstract void update(Level level);
+    public abstract void update(Level level,GameContainer arg0);
     public abstract void render(Graphics g);
     public abstract void spawn();
+
+    public void die(Level e){
+            dead= true;
+            e.removeEntity(this);
+    }
 
     public int getX(){
         return this.x;

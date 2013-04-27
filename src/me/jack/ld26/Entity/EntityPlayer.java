@@ -2,7 +2,10 @@ package me.jack.ld26.Entity;
 
 import me.jack.ld26.Level.Level;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Shape;
 
@@ -20,8 +23,8 @@ public class EntityPlayer extends Entity {
     }
 
     @Override
-    public void update(Level level) {
-        handleInput(level);
+    public void update(Level level,GameContainer arg0) {
+        handleInput(level,arg0);
         if (xVelocity != 0) {
             if (xVelocity > 0) {
                 if(level.canMove(x+2,y,this)){
@@ -66,7 +69,7 @@ public class EntityPlayer extends Entity {
     }
 
 
-    private void handleInput(Level level) {
+    private void handleInput(Level level,GameContainer arg0) {
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             yVelocity = -5;
         }
@@ -81,6 +84,20 @@ public class EntityPlayer extends Entity {
 
         if(Keyboard.isKeyDown(Keyboard.KEY_D)){
             xVelocity = +5;
+        }
+
+        Input i = arg0.getInput();
+        if(Mouse.isButtonDown(0)){
+            int mX = i.getMouseX();
+            int mY = i.getMouseY();
+            float xSpeed = mX - x;
+            float ySpeed = mY - y;
+            float factor = (float)(9/Math.sqrt(xSpeed * xSpeed + ySpeed*ySpeed));
+            xSpeed = xSpeed * factor;
+            ySpeed = ySpeed*factor;
+                level.addEntity(new EntityPlayerProjectile(x,y,xSpeed,ySpeed));
+
+
         }
     }
 

@@ -23,7 +23,7 @@ public class LD26Game extends BasicGame{
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
-        level.update();
+        level.update(gameContainer);
     }
 
     @Override

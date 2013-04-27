@@ -2,11 +2,14 @@ package me.jack.ld26.Level;
 
 import me.jack.ld26.Entity.Entity;
 import me.jack.ld26.Entity.EntityPlayer;
+import me.jack.ld26.Entity.EntityPlayerProjectile;
 import me.jack.ld26.Entity.EntityTower;
+import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
 import java.util.ArrayList;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Author: Jack
@@ -15,7 +18,7 @@ import java.util.ArrayList;
 public class Level {
 
 
-    ArrayList<Entity> entitys = new ArrayList<Entity>();
+    CopyOnWriteArrayList<Entity> entitys = new CopyOnWriteArrayList<Entity>();
     Rectangle left = new Rectangle(0,0,16,600);
     Rectangle right = new Rectangle(784,0,16,600);
     Rectangle top = new Rectangle(0,0,800,16);
@@ -49,23 +52,25 @@ public class Level {
 
     }
 
-    public void update(){
-        player.update(this);
+    public void update(GameContainer arg0){
+        player.update(this,arg0);
         for(Entity e : entitys){
-            e.update(this);
+            e.update(this,arg0);
         }
-        tower.update(this);
+        tower.update(this,arg0);
     }
 
     public boolean canMove(int nX,int nY,Entity move){
         for(Entity e : entitys){
             if(e == move)
                 continue;
+            if(e instanceof EntityPlayerProjectile && move instanceof EntityPlayerProjectile)
+                continue;
             if(e.getShape().intersects(move.getShape())){
                 return false;
             }
         }
-        if(!(move instanceof EntityPlayer)){
+        if(!(move instanceof EntityPlayer) && !(move instanceof EntityPlayerProjectile)){
             if(move.getShape().intersects(player.getShape()))
                 return false;
         }
@@ -84,5 +89,15 @@ public class Level {
 
         return true;
 
+    }
+
+    public void addEntity(Entity entity) {
+        entitys.add(entity);
+        entity.spawn();
+        System.out.println("Added new entity: " + entity.getClass().getCanonicalName());
+    }
+
+    public void removeEntity(Entity e) {
+    entitys.remove(e);
     }
 }
