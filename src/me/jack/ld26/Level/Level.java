@@ -34,6 +34,7 @@ public class Level {
 
     Image towerPowerEnd = null;
     Animation towerPowerAnim = null;
+
     public void init() {
         player = new EntityPlayer(400, 200);
         player.spawn();

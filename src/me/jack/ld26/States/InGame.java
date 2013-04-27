@@ -17,7 +17,7 @@ public class InGame extends BasicGameState {
     Image bg = null;
 
 
-
+    long timePassed = 0;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
         level.init();
@@ -34,8 +34,10 @@ public class InGame extends BasicGameState {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         level.update(gameContainer);
         if(level.tower.health < 1){
+            GameOver.set(timePassed);
             stateBasedGame.enterState(2);
         }
+        timePassed+=i;
     }
 
     @Override
