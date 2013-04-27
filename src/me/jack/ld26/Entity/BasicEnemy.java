@@ -40,8 +40,11 @@ public class BasicEnemy extends Entity{
             x+=xMove;
             y+=yMove;
         }
-        shape.setX(x);
-        shape.setY(y);
+
+                shape.setX(x);
+                shape.setY(y);
+
+
 
     }
 
@@ -66,7 +69,12 @@ public class BasicEnemy extends Entity{
         if(e instanceof EntityTower)
             die(l);
 
-        if(e instanceof  EntityPlayerProjectile)
+        if(e instanceof  EntityPlayerProjectile){
+            if(l.towerPower >= 100){
+                l.towerPower = 100;
+            }else
+            l.towerPower+=2;
             die(l);
+        }
     }
 }

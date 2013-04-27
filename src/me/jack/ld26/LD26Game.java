@@ -17,21 +17,21 @@ public class LD26Game extends BasicGame{
 
 
     Level level = new Level();
+    Image bg = null;
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
         level.init();
+        bg = new Image("/res/bg.png");
     }
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
         level.update(gameContainer);
-        if(Mouse.isButtonDown(0)){
-            System.out.println(gameContainer.getInput().getMouseX() + " " + gameContainer.getInput().getMouseY());
-        }
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
+        graphics.drawImage(bg,0,0);
         level.render(graphics);
     }
 }

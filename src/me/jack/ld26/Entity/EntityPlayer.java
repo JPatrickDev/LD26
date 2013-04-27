@@ -71,7 +71,7 @@ public class EntityPlayer extends Entity {
     }
 
     long lastShot = 0;
-    long shotDelay = 50;
+    long shotDelay = 100;
     private void handleInput(Level level,GameContainer arg0) {
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             yVelocity = -5;

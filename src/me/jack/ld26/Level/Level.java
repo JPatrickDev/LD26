@@ -1,8 +1,7 @@
 package me.jack.ld26.Level;
 
 import me.jack.ld26.Entity.*;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
+import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
 import java.util.Random;
@@ -24,6 +23,10 @@ public class Level {
 
     private EntityTower tower;
 
+
+    public int towerPower =0;
+
+
     public Level() {
 
     }
@@ -32,12 +35,23 @@ public class Level {
     int currentLevel = 0;
   public  int alive = 0;
 
+    Image towerPowerEnd = null;
+    Animation towerPowerAnim = null;
     public void init() {
         player = new EntityPlayer(400, 200);
         player.spawn();
 
         tower = new EntityTower(400 - 8, 300 - 8);
         tower.spawn();
+        try {
+            towerPowerEnd = new Image("/res/barEnd.png");
+            SpriteSheet sheet = new SpriteSheet("/res/barEndAnim.png",10,5);
+            towerPowerAnim = new Animation();
+            towerPowerAnim.addFrame(sheet.getSprite(0,0),500);
+            towerPowerAnim.addFrame(sheet.getSprite(1,0),500);
+        } catch (SlickException e) {
+            e.printStackTrace();
+        }
     }
 
     public void render(Graphics g) {
@@ -53,6 +67,17 @@ public class Level {
         g.fill(top);
         g.fill(bottom);
 
+
+        if(towerPower != 100){
+            g.setColor(Color.cyan);
+            g.fillRect(20, 40, towerPower, 5);
+        g.drawImage(towerPowerEnd,20+towerPower,40);
+        }else{
+            g.setColor(Color.blue);
+            g.fillRect(20, 40, towerPower, 5);
+        towerPowerAnim.draw(20+towerPower,40);
+        }
+        g.setColor(Color.white);
     }
 
     public void update(GameContainer arg0) {
@@ -89,7 +114,6 @@ public class Level {
             x = new Random().nextInt(700) + 16;
             y = new Random().nextInt(500) + 16;
             addEntity(new BasicEnemy(x, y, (int) tower.getX() + 16, (int) tower.getY() + 16));
-
             alive++;
         }
     }

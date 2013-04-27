@@ -1,10 +1,8 @@
 package me.jack.ld26.Entity;
 
 import me.jack.ld26.Level.Level;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
+import org.newdawn.slick.geom.Circle;
 import org.newdawn.slick.geom.Rectangle;
 
 /**
@@ -16,36 +14,43 @@ public class EntityTower extends Entity {
 
     private int cX, cY;
 
+    Color[] colors = new Color[]{Color.white,Color.darkGray,Color.blue};
+    int pos = 0;
+
+    int shownFor = 0;
     public EntityTower(int x, int y) {
         super(x, y);
     }
 
     @Override
     public void update(Level level, GameContainer arg0) {
-
+        if(shownFor >= 50){
+            shownFor = 0;
+            if(pos != colors.length-1){
+                pos++;
+            }else{
+                pos = 0;
+            }
+        }
     }
 
 
 
     @Override
     public void render(Graphics g) {
-        g.drawImage(image, x, y);
+        g.setColor(colors[pos]);
+        g.fill(shape);
+        g.setColor(Color.white);
+        shownFor++;
     }
 
     @Override
     public void spawn() {
-        if (image == null) {
-            try {
-                image = new Image("/res/tower.png");
-            } catch (SlickException e) {
-                e.printStackTrace();
-            }
-        }
 
         cX = x + (16);
         cY = y + (16);
 
-        this.shape = new Rectangle(x, y, 32, 32);
+        this.shape = new Circle(cX,cY,16);
     }
 
     @Override
