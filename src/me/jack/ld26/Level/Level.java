@@ -58,6 +58,7 @@ public class Level {
             e.update(this,arg0);
         }
         tower.update(this,arg0);
+        System.out.println(entitys.size());
     }
 
     public boolean canMove(int nX,int nY,Entity move){
@@ -65,6 +66,9 @@ public class Level {
             if(e == move)
                 continue;
             if(e instanceof EntityPlayerProjectile && move instanceof EntityPlayerProjectile)
+                continue;
+
+            if(move instanceof EntityPlayer && e instanceof EntityPlayerProjectile)
                 continue;
             if(e.getShape().intersects(move.getShape())){
                 return false;
@@ -74,6 +78,7 @@ public class Level {
             if(move.getShape().intersects(player.getShape()))
                 return false;
         }
+
         if(!(move instanceof EntityTower)){
             if(move.getShape().intersects(tower.getShape()))
                 return false;

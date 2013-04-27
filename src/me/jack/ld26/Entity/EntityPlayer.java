@@ -68,7 +68,8 @@ public class EntityPlayer extends Entity {
 
     }
 
-
+    long lastShot = 0;
+    long shotDelay = 50;
     private void handleInput(Level level,GameContainer arg0) {
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             yVelocity = -5;
@@ -85,7 +86,8 @@ public class EntityPlayer extends Entity {
         if(Keyboard.isKeyDown(Keyboard.KEY_D)){
             xVelocity = +5;
         }
-
+    if(!canShoot())
+        return;
         Input i = arg0.getInput();
         if(Mouse.isButtonDown(0)){
             int mX = i.getMouseX();
@@ -99,6 +101,22 @@ public class EntityPlayer extends Entity {
 
 
         }
+    }
+
+    public boolean canShoot(){
+        if(lastShot == 0){
+            lastShot = System.currentTimeMillis();
+            return true;
+        }
+        long current = System.currentTimeMillis();
+        long diff = Math.abs(current - lastShot);
+        if(diff >=shotDelay){
+            lastShot = System.currentTimeMillis();
+            return true;
+        }
+
+        return false;
+
     }
 
     @Override
