@@ -7,6 +7,8 @@ import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
+import java.awt.Rectangle;
+
 /**
  * Author: Jack
  * Date: 27/04/13
@@ -33,8 +35,13 @@ public class ShopState extends BasicGameState {
 
     }
 
+    Rectangle backButton = new Rectangle(672,30,128,32);
+
+
+    boolean back = false;
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
+        graphics.drawImage(InGame.bg,0,0);
         graphics.setFont(LD26Game.font);
         int x = 132;
         int y = 132;
@@ -56,10 +63,30 @@ public class ShopState extends BasicGameState {
 
 
         }
+
+        graphics.setColor(Color.gray);
+        graphics.fillRect(672,30,128,32);
+        graphics.setColor(Color.white);
+        graphics.drawString("Back",672 + 64,10+32);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+        if(back){
+            stateBasedGame.enterState(1);
+            back = false;
+        }
+    }
+
+    @Override
+    public void mouseReleased(int button, int x, int y) {
+        super.mouseReleased(button, x, y);
+        if(button == 0){
+            if(backButton.contains(x,y)){
+               back = true;
+            }
+        }
 
     }
+
 }

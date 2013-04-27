@@ -10,7 +10,7 @@ import org.newdawn.slick.SlickException;
  */
 public class PowerUpSlot {
     Image image;
-   public Powerup p;
+    public Powerup p;
     public PowerUpSlot(String res,Powerup p ){
         try {
             image = new Image(res);
