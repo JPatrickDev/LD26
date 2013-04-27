@@ -23,9 +23,6 @@ public class EntityPlayerProjectile extends Entity{
         if(level.canMove((int)(x + xSpeed),(int)(y+ySpeed),this)){
         x+=xSpeed;
         y+=ySpeed;
-        }else{
-            die(level);
-            return;
         }
         shape.setX(x);
         shape.setY(y);
@@ -42,5 +39,14 @@ public class EntityPlayerProjectile extends Entity{
         float cY = y + (RADIUS / 2);
         shape = new Circle(cX, cY, RADIUS);
 
+    }
+
+    @Override
+    public void collide(Entity e,Level l) {
+            if(e == null){
+                die(l);
+            }
+        if(e instanceof EntityTower)
+            die(l);
     }
 }

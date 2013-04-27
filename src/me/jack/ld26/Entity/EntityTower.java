@@ -11,40 +11,47 @@ import org.newdawn.slick.geom.Rectangle;
  * Author: Jack
  * Date: 27/04/13
  */
-public class EntityTower extends Entity{
+public class EntityTower extends Entity {
     private static Image image;
 
-    private int cX,cY;
+    private int cX, cY;
+
     public EntityTower(int x, int y) {
         super(x, y);
     }
 
     @Override
-    public void update(Level level,GameContainer arg0) {
-angle+=1;
+    public void update(Level level, GameContainer arg0) {
+
     }
 
-    float angle = 0;
+
+
     @Override
     public void render(Graphics g) {
-        g.rotate(cX,cY,angle);
-        g.drawImage(image,x,y);
-        g.resetTransform();
+        g.drawImage(image, x, y);
     }
 
     @Override
     public void spawn() {
-       if(image == null){
-           try {
-               image = new Image("/res/tower.png");
-           } catch (SlickException e) {
-               e.printStackTrace();
-           }
-       }
+        if (image == null) {
+            try {
+                image = new Image("/res/tower.png");
+            } catch (SlickException e) {
+                e.printStackTrace();
+            }
+        }
 
         cX = x + (16);
-        cY = y+ (16);
+        cY = y + (16);
 
-        this.shape = new Rectangle(x,y,32,32);
+        this.shape = new Rectangle(x, y, 32, 32);
+    }
+
+    @Override
+    public void collide(Entity e,Level l) {
+        if(e == null){
+            die(l);
+        }
     }
 }

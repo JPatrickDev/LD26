@@ -24,6 +24,7 @@ public abstract class Entity {
     public abstract void update(Level level,GameContainer arg0);
     public abstract void render(Graphics g);
     public abstract void spawn();
+    public abstract void collide(Entity e,Level l);
 
     public void die(Level e){
             dead= true;

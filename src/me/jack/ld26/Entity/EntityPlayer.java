@@ -128,4 +128,9 @@ public class EntityPlayer extends Entity {
         float cY = y + (RADIUS / 2);
         shape = new Circle(cX, cY, RADIUS);
     }
+
+    @Override
+    public void collide(Entity e,Level l) {
+
+    }
 }

@@ -25,26 +25,24 @@ public class BasicEnemy extends Entity{
         int xMove = 0;
         int yMove = 0;
         if(x > tx){
-            xMove = -2;
+            xMove = -1;
         }
         else if(x < tx){
-            xMove = +2;
+            xMove = +1;
         }
 
         if(y > ty){
-            yMove = -2;
+            yMove = -1;
         }else if(y < ty){
-            yMove = +2;
+            yMove = +1;
         }
         if(level.canMove((int)(x + yMove),(int)(y+yMove),this)){
             x+=xMove;
             y+=yMove;
-        }else{
-            die(level);
-            return;
         }
         shape.setX(x);
         shape.setY(y);
+
     }
 
     @Override
@@ -58,5 +56,14 @@ public class BasicEnemy extends Entity{
     @Override
     public void spawn() {
             shape = new Rectangle(x,y,16,16);
+    }
+
+    @Override
+    public void collide(Entity e,Level l) {
+        if(e == null){
+            die(l);
+        }
+        if(e instanceof EntityTower)
+            die(l);
     }
 }

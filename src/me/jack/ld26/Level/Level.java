@@ -1,12 +1,11 @@
 package me.jack.ld26.Level;
 
 import me.jack.ld26.Entity.*;
-import me.jack.ld26.Utils;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
-import org.newdawn.slick.geom.Vector2f;
 
+import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
@@ -42,6 +41,7 @@ public class Level {
     }
 
     public void render(Graphics g) {
+
         tower.render(g);
         for (Entity e : entitys) {
             e.render(g);
@@ -56,13 +56,15 @@ public class Level {
     }
 
     public void update(GameContainer arg0) {
+
         player.update(this, arg0);
         for (Entity e : entitys) {
             e.update(this, arg0);
         }
-        tower.update(this, arg0);
+      tower.update(this, arg0);
 
         checkLevel(arg0);
+
     }
 
     public void checkLevel(GameContainer arg0) {
@@ -73,18 +75,28 @@ public class Level {
     }
 
     private void spawn(GameContainer arg0) {
-        int toSpawn = 30;
+        int toSpawn = currentLevel * 4;
         int x = 16;
         int y = 36;
-        for (int i = 0; i != toSpawn; i++) {
-            addEntity(new BasicEnemy(x, y,(int)tower.getX() + 16,(int)tower.getY() + 16));
-            x += 34;
+
+        int eachSide = toSpawn / 4;
+
+        int w = eachSide * 34;
+
+        x = (arg0.getWidth() / 2) - (w / 2);
+
+        for (int i = 0; i <= toSpawn; i++) {
+            x = new Random().nextInt(700) + 16;
+            y = new Random().nextInt(500) + 16;
+            addEntity(new BasicEnemy(x, y, (int) tower.getX() + 16, (int) tower.getY() + 16));
+
             alive++;
         }
     }
 
 
     public boolean canMove(int nX, int nY, Entity move) {
+
         for (Entity e : entitys) {
             if (e == move)
                 continue;
@@ -92,29 +104,46 @@ public class Level {
                 continue;
             if (move instanceof EntityPlayer && e instanceof EntityPlayerProjectile)
                 continue;
-            if(move instanceof  BasicEnemy && e instanceof BasicEnemy)
-                continue;
+            if (move instanceof BasicEnemy && e instanceof BasicEnemy) {
+                if (move.getShape().intersects(e.getShape())) {
+                    return false;
+                }
+            }
             if (e.getShape().intersects(move.getShape())) {
+                move.collide(e, this);
                 return false;
             }
         }
         if (!(move instanceof EntityPlayer) && !(move instanceof EntityPlayerProjectile)) {
-            if (move.getShape().intersects(player.getShape()))
+            if (move.getShape().intersects(player.getShape())) {
+                move.collide(player, this);
                 return false;
+            }
         }
 
         if (!(move instanceof EntityTower)) {
-            if (move.getShape().intersects(tower.getShape()))
+            if (move.getShape().intersects(tower.getShape())) {
+                move.collide(tower, this);
                 return false;
+            }
         }
-        if (move.getShape().intersects(left))
+        if (move.getShape().intersects(left)) {
+            move.collide(null, this);
             return false;
-        if (move.getShape().intersects(right))
+        }
+        if (move.getShape().intersects(right)) {
+            move.collide(null, this);
             return false;
-        if (move.getShape().intersects(top))
+        }
+        if (move.getShape().intersects(top)) {
+            move.collide(null, this);
             return false;
-        if (move.getShape().intersects(bottom))
+        }
+        if (move.getShape().intersects(bottom)) {
+            move.collide(null, this);
             return false;
+        }
+
 
         return true;
 
