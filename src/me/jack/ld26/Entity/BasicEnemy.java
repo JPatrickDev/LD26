@@ -24,6 +24,8 @@ public class BasicEnemy extends Entity {
         this.ty = ty;
     }
 
+
+
     @Override
     public void update(Level level, GameContainer arg0) {
         if (followingPlayer) {
@@ -32,16 +34,21 @@ public class BasicEnemy extends Entity {
         }
         int xMove = 0;
         int yMove = 0;
+        int moveSpeed = 0;
+        if(level.slow)
+            moveSpeed = 1;
+        else
+        moveSpeed = 2;
         if (x > tx) {
-            xMove = -1;
+            xMove = -moveSpeed;
         } else if (x < tx) {
-            xMove = +1;
+            xMove = +moveSpeed;
         }
 
         if (y > ty) {
-            yMove = -1;
+            yMove = -moveSpeed;
         } else if (y < ty) {
-            yMove = +1;
+            yMove = +moveSpeed;
         }
         if (level.canMove((int) (x + yMove), (int) (y + yMove), this)) {
             x += xMove;

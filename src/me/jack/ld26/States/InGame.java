@@ -1,6 +1,7 @@
 package me.jack.ld26.States;
 
 import me.jack.ld26.Level.Level;
+import me.jack.ld26.Powerup.SlowDownPowerup;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -46,6 +47,14 @@ public class InGame extends BasicGameState {
             stateBasedGame.enterState(2);
         }
         timePassed += i;
+    }
+
+    @Override
+    public void mouseReleased(int button, int x, int y) {
+        super.mouseReleased(button, x, y);
+        if(button == 1){
+            new SlowDownPowerup().use(level);
+        }
     }
 
     @Override

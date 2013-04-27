@@ -5,9 +5,15 @@ import me.jack.ld26.Level.Level;
 import me.jack.ld26.States.GameOver;
 import me.jack.ld26.States.InGame;
 import me.jack.ld26.States.IntroState;
+import me.jack.ld26.States.ShopState;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.*;
+
+import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.SlickException;
+import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.state.StateBasedGame;
+
+import java.awt.Font;
 
 /**
  * Author: Jack
@@ -19,11 +25,16 @@ public class LD26Game extends StateBasedGame {
         super(title);
     }
 
+    public static TrueTypeFont font;
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
+        Font f = new Font("Calibri",Font.PLAIN,34);
+        font = new TrueTypeFont(f,false);
+
         addState(new IntroState());
         addState(new InGame());
         addState(new GameOver());
+        addState(new ShopState());
     }
 
 }

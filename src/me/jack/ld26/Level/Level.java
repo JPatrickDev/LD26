@@ -24,6 +24,8 @@ public class Level {
     public int towerPower =0;
 
 
+
+    public boolean slow = false;
     public Level() {
 
     }
@@ -86,11 +88,16 @@ public class Level {
     }
 
     public void update(GameContainer arg0) {
-
+    if(slow)
+        System.out.println("Slow");
         player.update(this, arg0);
         for (Entity e : entitys) {
             e.update(this, arg0);
-        }
+
+            }
+
+
+
       tower.update(this, arg0);
 
         checkLevel(arg0);
@@ -118,7 +125,9 @@ public class Level {
         for (int i = 0; i <= toSpawn; i++) {
             x = new Random().nextInt(700) + 16;
             y = new Random().nextInt(500) + 16;
-            addEntity(new BasicEnemy(x, y, (int) tower.getX() + 16, (int) tower.getY() + 16));
+            BasicEnemy e = new BasicEnemy(x, y, (int) tower.getX() + 16, (int) tower.getY() + 16);
+
+            addEntity(e);
            // addEntity(new BasicEnemy(x, y, (int)    player.getX() + 16, (int) player.getY() + 16));
             alive++;
         }
