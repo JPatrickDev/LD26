@@ -1,6 +1,7 @@
 package me.jack.ld26.Level;
 
 import me.jack.ld26.Entity.Entity;
+import me.jack.ld26.Entity.EntityPlayer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Rectangle;
 
@@ -18,15 +19,21 @@ public class Level {
     Rectangle right = new Rectangle(784,0,16,600);
     Rectangle top = new Rectangle(0,0,800,16);
     Rectangle bottom = new Rectangle(0,584,800,16);
+    private EntityPlayer player;
+
     public Level(){
 
     }
 
+    public void init(){
+        player = new EntityPlayer(400,300);
+        player.spawn();
+    }
 
     public void render(Graphics g){
         for(Entity e : entitys){
             e.render(g);
-        }
+        }player.render(g);
         g.fill(left);
         g.fill(right);
         g.fill(top);
@@ -35,6 +42,7 @@ public class Level {
     }
 
     public void update(){
+        player.update();
         for(Entity e : entitys){
             e.update();
         }

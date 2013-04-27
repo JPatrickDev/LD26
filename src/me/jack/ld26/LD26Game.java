@@ -14,23 +14,20 @@ public class LD26Game extends BasicGame{
         super(title);
     }
 
-    EntityPlayer player = null;
+
     Level level = new Level();
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
-    player = new EntityPlayer(400,300);
-        player.spawn();
+        level.init();
     }
 
     @Override
     public void update(GameContainer gameContainer, int i) throws SlickException {
-        player.update();
         level.update();
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-    player.render(graphics);
         level.render(graphics);
     }
 }
