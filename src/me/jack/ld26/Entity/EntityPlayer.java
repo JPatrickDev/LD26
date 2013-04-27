@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Shape;
  */
 public class EntityPlayer extends Entity {
 
-    private Shape shape;
+
     private static final float RADIUS = 16;
 
     public EntityPlayer(int x, int y) {

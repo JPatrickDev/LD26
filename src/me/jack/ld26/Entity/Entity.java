@@ -1,6 +1,7 @@
 package me.jack.ld26.Entity;
 
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.geom.Shape;
 
 /**
  * Author: Jack
@@ -9,7 +10,7 @@ import org.newdawn.slick.Graphics;
 public abstract class Entity {
 
     protected int x,y;
-
+    protected Shape shape;
     protected int xVelocity,yVelocity;
 
     public Entity(int x,int y){
@@ -29,4 +30,7 @@ public abstract class Entity {
         return this.y;
     }
 
+    public Shape getShape(){
+        return this.shape;
+    }
 }
