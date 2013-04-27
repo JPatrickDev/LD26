@@ -14,7 +14,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Level {
 
 
-    CopyOnWriteArrayList<Entity> entitys = new CopyOnWriteArrayList<Entity>();
+    public CopyOnWriteArrayList<Entity> entitys = new CopyOnWriteArrayList<Entity>();
     Rectangle left = new Rectangle(0, 0, 16, 600);
     Rectangle right = new Rectangle(784, 0, 16, 600);
     Rectangle top = new Rectangle(0, 0, 800, 16);
