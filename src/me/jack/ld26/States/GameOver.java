@@ -16,6 +16,7 @@ public class GameOver extends BasicGameState{
 
     Image bg = null;
     static int seconds = 0;
+    static int levelReached = 0;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
        bg = new Image("/res/over.png");
@@ -26,7 +27,8 @@ public class GameOver extends BasicGameState{
         graphics.drawImage(bg,0,0);
 
         graphics.drawString("You survived " + seconds + " seconds!",50,276);
-        graphics.drawString("Thank you for playing!",50,300);
+        graphics.drawString("You reached round " + levelReached,50,300);
+        graphics.drawString("Thank you for playing!",50,330);
     }
 
     @Override
@@ -39,8 +41,9 @@ public class GameOver extends BasicGameState{
         return 2;
     }
 
-    public static void set(long timePassed) {
+    public static void set(long timePassed,int round) {
     seconds= (int) (timePassed/1000);
+        levelReached = round;
 
     }
 }

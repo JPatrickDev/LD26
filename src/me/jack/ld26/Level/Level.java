@@ -29,7 +29,7 @@ public class Level {
     }
 
 
-    int currentLevel = 0;
+    public int currentLevel = 0;
   public  int alive = 0;
 
     Image towerPowerEnd = null;
@@ -149,7 +149,7 @@ public class Level {
             }
         }
 
-        if (!(move instanceof EntityTower) && !(move instanceof EntityPlayerProjectile)) {
+        if (!(move instanceof EntityTower) && !(move instanceof EntityPlayerProjectile) && !(move instanceof EntityPlayer)) {
             if (move.getShape().intersects(tower.getShape())) {
                 move.collide(tower, this);
                 return false;

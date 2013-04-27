@@ -37,12 +37,12 @@ public class InGame extends BasicGameState {
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
         level.update(gameContainer);
         if (level.tower.health < 1) {
-            GameOver.set(timePassed);
+            GameOver.set(timePassed,level.currentLevel);
             stateBasedGame.enterState(2);
         }
 
         if (level.player.health < 1) {
-            GameOver.set(timePassed);
+            GameOver.set(timePassed,level.currentLevel);
             stateBasedGame.enterState(2);
         }
         timePassed += i;
