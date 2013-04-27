@@ -15,13 +15,10 @@ public class Level {
 
 
     public CopyOnWriteArrayList<Entity> entitys = new CopyOnWriteArrayList<Entity>();
-    Rectangle left = new Rectangle(0, 0, 16, 600);
-    Rectangle right = new Rectangle(784, 0, 16, 600);
-    Rectangle top = new Rectangle(0, 0, 800, 16);
-    Rectangle bottom = new Rectangle(0, 584, 800, 16);
-    private EntityPlayer player;
 
-    private EntityTower tower;
+    public EntityPlayer player;
+
+    public EntityTower tower;
 
 
     public int towerPower =0;
@@ -62,21 +59,21 @@ public class Level {
         }
 
         player.render(g);
-        g.fill(left);
-        g.fill(right);
-        g.fill(top);
-        g.fill(bottom);
 
 
         if(towerPower != 100){
             g.setColor(Color.cyan);
             g.fillRect(20, 40, towerPower, 5);
-        g.drawImage(towerPowerEnd,20+towerPower,40);
+            g.drawImage(towerPowerEnd,20+towerPower,40);
         }else{
             g.setColor(Color.blue);
             g.fillRect(20, 40, towerPower, 5);
         towerPowerAnim.draw(20+towerPower,40);
         }
+
+        g.setColor(Color.red);
+        g.fillRect(20,50,tower.health,5);
+        g.drawImage(towerPowerEnd,20+tower.health,50);
         g.setColor(Color.white);
     }
 
@@ -114,6 +111,7 @@ public class Level {
             x = new Random().nextInt(700) + 16;
             y = new Random().nextInt(500) + 16;
             addEntity(new BasicEnemy(x, y, (int) tower.getX() + 16, (int) tower.getY() + 16));
+           // addEntity(new BasicEnemy(x, y, (int)    player.getX() + 16, (int) player.getY() + 16));
             alive++;
         }
     }
@@ -149,23 +147,15 @@ public class Level {
                 return false;
             }
         }
-        if (move.getShape().intersects(left)) {
-            move.collide(null, this);
-            return false;
-        }
-        if (move.getShape().intersects(right)) {
-            move.collide(null, this);
-            return false;
-        }
-        if (move.getShape().intersects(top)) {
-            move.collide(null, this);
-            return false;
-        }
-        if (move.getShape().intersects(bottom)) {
-            move.collide(null, this);
-            return false;
-        }
 
+        if(nX < 0 || nX > 760){
+            move.collide(null,this);
+            return  false;
+        }
+        if(nY < 0 || nY > 580){
+            move.collide(null,this);
+            return  false;
+        }
 
         return true;
 

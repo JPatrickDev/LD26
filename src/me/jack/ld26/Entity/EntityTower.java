@@ -29,6 +29,8 @@ public class EntityTower extends Entity {
     boolean AOE = false;
     float AOERadius = 0.0f;
     public Circle AOEShape = null;
+
+    public int health = 100;
     Color color = null;
     public EntityTower(int x, int y) {
         super(x, y);
@@ -109,6 +111,10 @@ public class EntityTower extends Entity {
     public void collide(Entity e, Level l) {
         if (e == null) {
             die(l);
+        }
+
+        if(e instanceof BasicEnemy){
+            this.health--;
         }
     }
 }

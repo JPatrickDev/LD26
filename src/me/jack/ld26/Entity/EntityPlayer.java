@@ -27,44 +27,6 @@ public class EntityPlayer extends Entity {
     @Override
     public void update(Level level,GameContainer arg0) {
         handleInput(level,arg0);
-        if (xVelocity != 0) {
-            if (xVelocity > 0) {
-                if(level.canMove(x+2,y,this)){
-                xVelocity--;
-                x+=2;
-                }else{
-                    xVelocity = 0;
-                    x-=2;
-                }
-            } else {
-                if(level.canMove(x-2,y,this)){
-                xVelocity++;
-                x-=2;
-                }else{
-                    xVelocity = 0;
-                    x+=2;
-                }
-            }
-        }
-        if (yVelocity != 0) {
-            if (yVelocity > 0) {
-                if(level.canMove(x,y+2,this)){
-                y+=2;
-                yVelocity--;
-                }else{
-                    yVelocity = 0;
-                    y-=2;
-                }
-            } else {
-                if(level.canMove(x,y-2,this)){
-                y-=2;
-               yVelocity++;
-                }else{
-                    yVelocity = 0;
-                    y+=2;
-                }
-            }
-        }
         shape.setX(x);
         shape.setY(y);
 
@@ -73,21 +35,32 @@ public class EntityPlayer extends Entity {
     long lastShot = 0;
     long shotDelay = 100;
     private void handleInput(Level level,GameContainer arg0) {
+        int xa = 0;
+        int ya = 0;
+
+        boolean up = false;
+        boolean dir = false;
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
-            yVelocity = -5;
+            move(0,-1,level);
+            move(0,-1,level);
         }
 
         if(Keyboard.isKeyDown(Keyboard.KEY_A)){
-            xVelocity = -5;
+            move(-1,0,level);
+            move(-1,0,level);
         }
 
         if(Keyboard.isKeyDown(Keyboard.KEY_S)){
-            yVelocity = +5;
+            move(0,1,level);
+            move(0,1,level);
         }
 
         if(Keyboard.isKeyDown(Keyboard.KEY_D)){
-            xVelocity = +5;
+        move(1,0,level);
+            move(1,0,level);
         }
+
+
     if(!canShoot())
         return;
         Input i = arg0.getInput();
@@ -101,6 +74,12 @@ public class EntityPlayer extends Entity {
         }
     }
 
+    private void move(int xa,int ya,Level level){
+        if(level.canMove(x+xa,y+ya,this)){
+            x+=xa;
+            y+=ya;
+        }
+    }
     public boolean canShoot(){
         if(lastShot == 0){
             lastShot = System.currentTimeMillis();
