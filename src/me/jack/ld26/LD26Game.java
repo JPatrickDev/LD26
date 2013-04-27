@@ -4,6 +4,7 @@ import me.jack.ld26.Entity.EntityPlayer;
 import me.jack.ld26.Level.Level;
 import me.jack.ld26.States.GameOver;
 import me.jack.ld26.States.InGame;
+import me.jack.ld26.States.IntroState;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.StateBasedGame;
@@ -20,6 +21,7 @@ public class LD26Game extends StateBasedGame {
 
     @Override
     public void initStatesList(GameContainer gameContainer) throws SlickException {
+        addState(new IntroState());
         addState(new InGame());
         addState(new GameOver());
     }
