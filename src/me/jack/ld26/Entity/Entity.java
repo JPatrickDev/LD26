@@ -29,6 +29,9 @@ public abstract class Entity {
     public void die(Level e){
             dead= true;
             e.removeEntity(this);
+        if(this instanceof BasicEnemy){
+            e.alive--;
+        }
     }
 
     public int getX(){

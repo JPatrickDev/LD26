@@ -30,7 +30,7 @@ public class Level {
 
 
     int currentLevel = 0;
-    int alive = 0;
+  public  int alive = 0;
 
     public void init() {
         player = new EntityPlayer(400, 200);
@@ -75,7 +75,7 @@ public class Level {
     }
 
     private void spawn(GameContainer arg0) {
-        int toSpawn = currentLevel * 4;
+        int toSpawn = currentLevel * 2;
         int x = 16;
         int y = 36;
 
@@ -105,9 +105,7 @@ public class Level {
             if (move instanceof EntityPlayer && e instanceof EntityPlayerProjectile)
                 continue;
             if (move instanceof BasicEnemy && e instanceof BasicEnemy) {
-                if (move.getShape().intersects(e.getShape())) {
-                    return false;
-                }
+                continue;
             }
             if (e.getShape().intersects(move.getShape())) {
                 move.collide(e, this);
@@ -121,7 +119,7 @@ public class Level {
             }
         }
 
-        if (!(move instanceof EntityTower)) {
+        if (!(move instanceof EntityTower) && !(move instanceof EntityPlayerProjectile)) {
             if (move.getShape().intersects(tower.getShape())) {
                 move.collide(tower, this);
                 return false;

@@ -65,5 +65,8 @@ public class BasicEnemy extends Entity{
         }
         if(e instanceof EntityTower)
             die(l);
+
+        if(e instanceof  EntityPlayerProjectile)
+            die(l);
     }
 }
