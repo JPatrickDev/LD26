@@ -1,8 +1,10 @@
 package me.jack.ld26.Entity;
 
+import me.jack.ld26.Level.Level;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.geom.Rectangle;
 
 /**
  * Author: Jack
@@ -17,7 +19,7 @@ public class EntityTower extends Entity{
     }
 
     @Override
-    public void update() {
+    public void update(Level level) {
 angle+=1;
     }
 
@@ -41,5 +43,7 @@ angle+=1;
 
         cX = x + (16);
         cY = y+ (16);
+
+        this.shape = new Rectangle(x,y,32,32);
     }
 }

@@ -28,7 +28,7 @@ public class Level {
     }
 
     public void init(){
-        player = new EntityPlayer(400,300);
+        player = new EntityPlayer(400,200);
         player.spawn();
 
         tower =new EntityTower(400-8,300-8);
@@ -50,11 +50,11 @@ public class Level {
     }
 
     public void update(){
-        player.update();
+        player.update(this);
         for(Entity e : entitys){
-            e.update();
+            e.update(this);
         }
-        tower.update();
+        tower.update(this);
     }
 
     public boolean canMove(int nX,int nY,Entity move){
@@ -70,7 +70,7 @@ public class Level {
                 return false;
         }
         if(!(move instanceof EntityTower)){
-            if(move.getShape().intersects(move.getShape()))
+            if(move.getShape().intersects(tower.getShape()))
                 return false;
         }
         if(move.getShape().intersects(left))
@@ -81,6 +81,7 @@ public class Level {
             return false;
         if(move.getShape().intersects(bottom))
             return false;
+
         return true;
 
     }

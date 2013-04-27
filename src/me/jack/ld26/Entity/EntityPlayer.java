@@ -1,5 +1,6 @@
 package me.jack.ld26.Entity;
 
+import me.jack.ld26.Level.Level;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Circle;
@@ -19,24 +20,44 @@ public class EntityPlayer extends Entity {
     }
 
     @Override
-    public void update() {
-        handleInput();
+    public void update(Level level) {
+        handleInput(level);
         if (xVelocity != 0) {
             if (xVelocity > 0) {
+                if(level.canMove(x+2,y,this)){
                 xVelocity--;
                 x+=2;
+                }else{
+                    xVelocity = 0;
+                    x-=2;
+                }
             } else {
+                if(level.canMove(x-2,y,this)){
                 xVelocity++;
                 x-=2;
+                }else{
+                    xVelocity = 0;
+                    x+=2;
+                }
             }
         }
         if (yVelocity != 0) {
             if (yVelocity > 0) {
+                if(level.canMove(x,y+2,this)){
                 y+=2;
                 yVelocity--;
+                }else{
+                    yVelocity = 0;
+                    y-=2;
+                }
             } else {
+                if(level.canMove(x,y-2,this)){
                 y-=2;
                yVelocity++;
+                }else{
+                    yVelocity = 0;
+                    y+=2;
+                }
             }
         }
         shape.setX(x);
@@ -45,7 +66,7 @@ public class EntityPlayer extends Entity {
     }
 
 
-    private void handleInput() {
+    private void handleInput(Level level) {
         if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
             yVelocity = -5;
         }

@@ -1,5 +1,6 @@
 package me.jack.ld26.Entity;
 
+import me.jack.ld26.Level.Level;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.geom.Shape;
 
@@ -18,7 +19,7 @@ public abstract class Entity {
         this.y = y;
     }
 
-    public abstract void update();
+    public abstract void update(Level level);
     public abstract void render(Graphics g);
     public abstract void spawn();
 
