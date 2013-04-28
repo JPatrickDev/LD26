@@ -21,6 +21,25 @@ public class DifficultySelectState extends BasicGameState {
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+        int x = 0;
+        int y = 0;
+        int   width = gameContainer.getGraphics().getFont().getWidth("Please select your difficulty:");
+        x = (gameContainer.getWidth() / 2) - (gameContainer.getGraphics().getFont().getWidth("Please select your difficulty:") / 2);
+        y = 50;
+    //y+=64;
+
+        y += 64;
+        rects.add(new Rectangle(x,y,width,32));
+
+        y += 10;
+        y += 64;
+        rects.add(new Rectangle(x,y,width,32));
+        y += 10;
+
+
+        y += 64;
+        rects.add(new Rectangle(x,y,width,32));
+        y += 10;
 
     }
 
@@ -41,20 +60,16 @@ public class DifficultySelectState extends BasicGameState {
         graphics.setColor(Color.white);
         graphics.drawString("Easy", x + ((width / 2) - (graphics.getFont().getWidth(
                 "Easy")/2)),y + (16 - graphics.getFont().getHeight("Easy")/2));
-    if(rects.size() == 0){
-        rects.add(new Rectangle(x,y,width,32));
-    }
+
         y += 10;
 
-        rects.add(new Rectangle(x,y,width,32));
         graphics.setColor(Color.gray);
         y += 64;
         graphics.fillRect(x, y, width, 32);
         graphics.setColor(Color.white);
         graphics.drawString("Normal", x + ((width / 2) - (graphics.getFont().getWidth(
                 "Normal")/2)),y + (16 - graphics.getFont().getHeight("Normal")/2));
-        if(rects.size() == 1)
-        rects.add(new Rectangle(x,y,width,32));
+
         y += 10;
 
         graphics.setColor(Color.gray);
@@ -63,8 +78,7 @@ public class DifficultySelectState extends BasicGameState {
         graphics.setColor(Color.white);
         graphics.drawString("Hard", x + ((width / 2) - (graphics.getFont().getWidth(
                 "Hard")/2)),y + (16 - graphics.getFont().getHeight("Hard")/2));
-        if(rects.size() == 2)
-        rects.add(new Rectangle(x,y,width,32));
+
         y += 10;
 
     }
@@ -73,22 +87,21 @@ public class DifficultySelectState extends BasicGameState {
     @Override
     public void mouseReleased(int button, int x, int y) {
         super.mouseReleased(button, x, y);
-        System.out.println(rects.size());
-        int  i= 0;
-        for(Rectangle r : rects){
+       if(button != 0)
+           return;
+        for(int i = 0 ;i!= rects.size();i++){
+            Rectangle r = rects.get(i);
             if(r.contains(x,y)){
-
-                if(i == 1){
+                if(i == 0){
                     Level.timeTillEnd = 60;
-                }else if(i==2){
+                }else if(i == 1){
                     Level.timeTillEnd = 90;
-                }else{
+                }else if(i==2){
                     Level.timeTillEnd = 120;
                 }
-                     next = true;
 
+                next= true;
             }
-            i=+1;
         }
 
     }

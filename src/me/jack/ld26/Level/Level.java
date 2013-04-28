@@ -17,7 +17,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class Level {
 
 
-    public static int timeTillEnd = 60;
+    public static int timeTillEnd = 0;
     public CopyOnWriteArrayList<Entity> entitys = new CopyOnWriteArrayList<Entity>();
 
     public EntityPlayer player;
@@ -112,12 +112,17 @@ public class Level {
 
         if (!tutorial.isStopped()) {
             tutorial.draw(0, 0);
+        }else{
+            p = false;
         }
 
     }
 
-    public void update(GameContainer arg0) {
+    boolean p = true;
 
+    public void update(GameContainer arg0) {
+    if(p)
+        return;
         System.out.println(timeTillEnd);
         player.update(this, arg0);
         for (Entity e : entitys) {

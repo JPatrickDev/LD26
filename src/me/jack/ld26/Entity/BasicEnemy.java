@@ -65,27 +65,11 @@ public class BasicEnemy extends Entity {
             y += yMove;
         }
 
-        checkFollowing(level);
-
         shape.setX(x);
         shape.setY(y);
-
-
     }
 
 
-    public void checkFollowing(Level level) {
-        Circle pRad = new Circle(level.player.getShape().getCenterX(), level.player.getShape().getCenterY(), 128);
-        if (shape.intersects(pRad) && !(following instanceof DistractionBomb)) {
-            this.followingPlayer = true;
-        } else {
-            if (!followingPlayer)
-                return;
-            this.followingPlayer = false;
-            this.tx = (int) level.tower.getShape().getCenterX();
-            this.ty = (int) level.tower.getShape().getCenterY();
-        }
-    }
 
 
     @Override
