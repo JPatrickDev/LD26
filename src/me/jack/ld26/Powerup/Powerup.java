@@ -11,5 +11,7 @@ public abstract class Powerup {
 
     public abstract int getCost();
 
+    public abstract boolean canUse(Level level);
+
 
 }

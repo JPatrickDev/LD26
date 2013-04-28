@@ -31,4 +31,9 @@ public class SlowDownPowerup extends Powerup{
     public int getCost() {
         return 10;
     }
+
+    @Override
+    public boolean canUse(Level level) {
+        return level.towerPower == 100;
+    }
 }

@@ -1,5 +1,6 @@
 package me.jack.ld26.Entity;
 
+import me.jack.JEngine.Util.SoundEngine;
 import me.jack.ld26.Level.Level;
 import me.jack.ld26.Utils;
 import org.lwjgl.input.Keyboard;
@@ -72,6 +73,7 @@ public class EntityPlayer extends Entity {
             int mY = i.getMouseY();
             Vector2f speed = Utils.getSpeed(mX, x, mY, y, 9);
             level.addEntity(new EntityPlayerProjectile(x, y, speed.getX(), speed.getY()));
+            SoundEngine.getInstance().play("shot");
         } else if (Mouse.isButtonDown(1)) {
             if (level.distractAmmo !=  0) {
                 int mX = i.getMouseX();

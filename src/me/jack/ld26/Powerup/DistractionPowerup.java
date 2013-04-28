@@ -17,4 +17,9 @@ public class DistractionPowerup extends Powerup
     public int getCost() {
         return 40;
     }
+
+    @Override
+    public boolean canUse(Level level) {
+        return true;
+    }
 }

@@ -1,5 +1,6 @@
 package me.jack.ld26.States;
 
+import me.jack.JEngine.Util.SoundEngine;
 import me.jack.ld26.LD26Game;
 import me.jack.ld26.Level.Level;
 import me.jack.ld26.Powerup.AOEPowerUp;
@@ -110,8 +111,10 @@ public class ShopState extends BasicGameState {
                     PowerUpSlot slot = slots[i];
                     if(Level.money >= slot.p.getCost()){
                         Level.money-=slot.p.getCost();
+                        SoundEngine.getInstance().play("buy");
                         if(!(slot.p instanceof DistractionPowerup))
                                  Level.current = slot.p;
+
                         else{
                             Level.distractAmmo+=5;
                         }
