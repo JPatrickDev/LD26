@@ -1,0 +1,1 @@
+java -Djava.library.path="windows/" -jar LD26.jar
