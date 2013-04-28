@@ -7,6 +7,7 @@ import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
 import java.awt.Rectangle;
+import java.util.HashMap;
 
 /**
  * Author: Jack
@@ -20,6 +21,18 @@ public class InGame extends BasicGameState {
 
 
     long timePassed = 0;
+
+
+    public static final HashMap<String,Integer> difficulty = new HashMap<String,Integer>();
+
+    static{
+        difficulty.put("EASY",60);
+        difficulty.put("NORMAL",90);
+        difficulty.put("HARD",120);
+    }
+
+
+
 
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
@@ -58,7 +71,7 @@ public class InGame extends BasicGameState {
             stateBasedGame.enterState(3);
             enterShop = false;
         }
-        if((timePassed / 1000) >= 60){
+        if((timePassed / 1000) >= level.timeTillEnd){
             GameOver.won();
             stateBasedGame.enterState(2);
             return;

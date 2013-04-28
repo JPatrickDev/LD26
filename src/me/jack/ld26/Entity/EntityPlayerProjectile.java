@@ -54,9 +54,9 @@ public class EntityPlayerProjectile extends Entity{
             if (l.towerPower >= 100) {
                 l.towerPower = 100;
             } else
-                l.towerPower += 2;
+                l.towerPower += 5;
 
-                l.money += 5;
+                l.money += 10;
                 die(l);
             e.die(l);
         }

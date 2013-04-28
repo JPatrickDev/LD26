@@ -2,10 +2,7 @@ package me.jack.ld26;
 
 import me.jack.ld26.Entity.EntityPlayer;
 import me.jack.ld26.Level.Level;
-import me.jack.ld26.States.GameOver;
-import me.jack.ld26.States.InGame;
-import me.jack.ld26.States.IntroState;
-import me.jack.ld26.States.ShopState;
+import me.jack.ld26.States.*;
 import org.lwjgl.input.Mouse;
 
 import org.newdawn.slick.GameContainer;
@@ -31,6 +28,7 @@ public class LD26Game extends StateBasedGame {
         Font f = new Font("Calibri",Font.PLAIN,34);
         font = new TrueTypeFont(f,false);
 
+        addState(new DifficultySelectState());
         addState(new IntroState());
         addState(new InGame());
         addState(new GameOver());

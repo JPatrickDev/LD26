@@ -33,21 +33,31 @@ public class IntroState extends BasicGameState{
     @Override
     public void enter(GameContainer container, StateBasedGame game) throws SlickException {
         super.enter(container, game);
-        SoundEngine.getInstance().addSound("shot", SoundUtils.loadSound("/res/sound/shot.wav"));
-        SoundEngine.getInstance().addSound("aoe",SoundUtils.loadSound("/res/sound/aoe.wav"));
-        SoundEngine.getInstance().addSound("nope",SoundUtils.loadSound("/res/sound/nope.wav"));
-        SoundEngine.getInstance().addSound("buy",SoundUtils.loadSound("/res/sound/buy.wav"));
+
     }
+
+    boolean draw = false;
+    boolean loaded =false;
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
         graphics.drawImage(intro,0,0);
+        draw = true;
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
+        if(draw && !loaded){
+            System.out.println("Loading");
+            SoundEngine.getInstance().addSound("shot", SoundUtils.loadSound("/res/sound/shot.wav"));
+            SoundEngine.getInstance().addSound("aoe",SoundUtils.loadSound("/res/sound/aoe.wav"));
+            SoundEngine.getInstance().addSound("nope",SoundUtils.loadSound("/res/sound/nope.wav"));
+            SoundEngine.getInstance().addSound("buy",SoundUtils.loadSound("/res/sound/buy.wav"));
+            loaded= true;
+        }
         if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
             stateBasedGame.enterState(1);
         }
+
     }
 }

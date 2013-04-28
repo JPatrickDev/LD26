@@ -48,7 +48,7 @@ public class BasicEnemy extends Entity {
         if (level.slow)
             moveSpeed = 1;
         else
-            moveSpeed = 2;
+            moveSpeed = 1;
         if (x > tx) {
             xMove = -moveSpeed;
         } else if (x < tx) {
@@ -76,7 +76,7 @@ public class BasicEnemy extends Entity {
 
     public void checkFollowing(Level level) {
         Circle pRad = new Circle(level.player.getShape().getCenterX(), level.player.getShape().getCenterY(), 128);
-        if (shape.intersects(pRad)) {
+        if (shape.intersects(pRad) && !(following instanceof DistractionBomb)) {
             this.followingPlayer = true;
         } else {
             if (!followingPlayer)
