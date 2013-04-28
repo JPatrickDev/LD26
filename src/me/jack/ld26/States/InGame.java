@@ -16,7 +16,7 @@ import java.util.HashMap;
 public class InGame extends BasicGameState {
 
 
-    Level level = new Level();
+    static Level level = new Level();
     static Image bg = null;
 
 
@@ -95,5 +95,14 @@ public class InGame extends BasicGameState {
     @Override
     public int getID() {
         return 1;
+    }
+
+    public static void reset() {
+        level = new Level();
+        level.init();
+         Level.money = 0;
+        Level.distractAmmo = 0;
+        Level.current = null;
+
     }
 }

@@ -29,6 +29,7 @@ public class BasicEnemy extends Entity {
 
     public Entity following = null;
 
+    boolean thisTurn = true;
     @Override
     public void update(Level level, GameContainer arg0) {
         if(followingPlayer && !(following instanceof EntityPlayer) ){
@@ -44,11 +45,19 @@ public class BasicEnemy extends Entity {
 
         int xMove = 0;
         int yMove = 0;
-        int moveSpeed = 0;
-        if (level.slow)
-            moveSpeed = 1;
-        else
-            moveSpeed = 2;
+        int moveSpeed = 1;
+        if (level.slow){
+           if(!thisTurn){
+               thisTurn = true;
+               return;
+           }
+            else{
+               thisTurn = false;
+           }
+        }else{
+            thisTurn = true;
+        }
+
         if (x > tx) {
             xMove = -moveSpeed;
         } else if (x < tx) {

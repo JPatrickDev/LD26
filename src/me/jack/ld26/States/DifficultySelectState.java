@@ -96,10 +96,13 @@ public class DifficultySelectState extends BasicGameState {
             if(r.contains(x,y)){
                 if(i == 0){
                     Level.timeTillEnd = 60;
+                    Level.maxHealth = 300;
                 }else if(i == 1){
                     Level.timeTillEnd = 90;
+                    Level.maxHealth = 200;
                 }else if(i==2){
                     Level.timeTillEnd = 120;
+                    Level.maxHealth = 100;
                 }
 
                 next= true;

@@ -1,5 +1,6 @@
 package me.jack.ld26.States;
 
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -39,11 +40,15 @@ public class GameOver extends BasicGameState{
         graphics.drawString("You reached Round " + levelReached,50,300);
         graphics.drawString("Thank you for playing!",50,330);
         graphics.drawString("Game made by Jack Patrick (@jack_patrickXx) for LD26",50,360);
+        graphics.drawString("SpaceBar to play again.",50,390);
     }
 
     @Override
     public void update(GameContainer gameContainer, StateBasedGame stateBasedGame, int i) throws SlickException {
-
+            if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+                InGame.reset();
+                stateBasedGame.enterState(0);
+            }
     }
 
     @Override

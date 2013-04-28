@@ -18,6 +18,7 @@ public class Level {
 
 
     public static int timeTillEnd = 0;
+    public static int maxHealth;
     public CopyOnWriteArrayList<Entity> entitys = new CopyOnWriteArrayList<Entity>();
 
     public EntityPlayer player;
@@ -54,9 +55,11 @@ public class Level {
 
     public void init() {
         player = new EntityPlayer(400, 200);
+        player.health = maxHealth;
         player.spawn();
         follow = player;
         tower = new EntityTower(400 - 8, 300 - 8);
+        tower.health = maxHealth;
         tower.spawn();
         try {
             towerPowerEnd = new Image("/res/barEnd.png");
