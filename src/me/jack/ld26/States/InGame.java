@@ -57,6 +57,12 @@ public class InGame extends BasicGameState {
             stateBasedGame.enterState(3);
             enterShop = false;
         }
+    System.out.println((timePassed / 1000));
+        if((timePassed / 1000) >= 60){
+            GameOver.won();
+            stateBasedGame.enterState(2);
+            return;
+        }
         timePassed += i;
     }
 
