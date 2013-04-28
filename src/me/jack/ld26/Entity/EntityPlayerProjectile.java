@@ -11,7 +11,7 @@ import org.newdawn.slick.geom.Circle;
  */
 public class EntityPlayerProjectile extends Entity{
     private float xSpeed,ySpeed;
-    private static final float RADIUS = 8;
+    private static final float RADIUS = 4;
     public EntityPlayerProjectile(int x, int y,float xSpeed,float ySpeed) {
         super(x, y);
         this.xSpeed = xSpeed;
@@ -48,5 +48,17 @@ public class EntityPlayerProjectile extends Entity{
             }
         if(e instanceof EntityTower)
             die(l);
+
+
+        if (e instanceof BasicEnemy) {
+            if (l.towerPower >= 100) {
+                l.towerPower = 100;
+            } else
+                l.towerPower += 2;
+
+                l.money += 5;
+                die(l);
+            e.die(l);
+        }
     }
 }

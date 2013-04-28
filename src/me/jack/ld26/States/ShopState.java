@@ -3,6 +3,7 @@ package me.jack.ld26.States;
 import me.jack.ld26.LD26Game;
 import me.jack.ld26.Level.Level;
 import me.jack.ld26.Powerup.AOEPowerUp;
+import me.jack.ld26.Powerup.DistractionPowerup;
 import me.jack.ld26.Powerup.PowerUpSlot;
 import me.jack.ld26.Powerup.SlowDownPowerup;
 import org.newdawn.slick.*;
@@ -34,6 +35,7 @@ public class ShopState extends BasicGameState {
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
             slots[0] = new PowerUpSlot("/res/powerups/slow.png",new SlowDownPowerup());
             slots[1] = new PowerUpSlot("/res/powerups/aoe.png",new AOEPowerUp());
+            slots[2] =  new PowerUpSlot("/res/powerups/distract.png",new DistractionPowerup());
         int i  =0;
 
         int x = 132;
@@ -108,7 +110,11 @@ public class ShopState extends BasicGameState {
                     PowerUpSlot slot = slots[i];
                     if(Level.money >= slot.p.getCost()){
                         Level.money-=slot.p.getCost();
-                    Level.current = slot.p;
+                        if(!(slot.p instanceof DistractionPowerup))
+                                 Level.current = slot.p;
+                        else{
+                            Level.distractAmmo+=5;
+                        }
                     }
                 }
                 i++;

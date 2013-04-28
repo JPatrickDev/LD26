@@ -17,28 +17,38 @@ public class BasicEnemy extends Entity {
 
     boolean followingPlayer = false;
 
-    public BasicEnemy(int x, int y, int tx, int ty) {
+    public BasicEnemy(int x, int y, int tx, int ty, Entity follow) {
         super(x, y);
 
         this.tx = tx;
         this.ty = ty;
+        this.following = follow;
+
     }
 
 
+    public Entity following = null;
 
     @Override
     public void update(Level level, GameContainer arg0) {
-        if (followingPlayer) {
-            tx = level.player.getX() + 16;
-            ty = level.player.getY() + 16;
+        if(followingPlayer && !(following instanceof EntityPlayer) ){
+            following = level.player;
         }
+
+        if(!followingPlayer && following instanceof EntityPlayer){
+           following = level.tower;
+        }
+
+        tx = (int) following.getShape().getCenterX();
+        ty = (int) following.getShape().getCenterY();
+
         int xMove = 0;
         int yMove = 0;
         int moveSpeed = 0;
-        if(level.slow)
+        if (level.slow)
             moveSpeed = 1;
         else
-        moveSpeed = 2;
+            moveSpeed = 2;
         if (x > tx) {
             xMove = -moveSpeed;
         } else if (x < tx) {
@@ -64,16 +74,16 @@ public class BasicEnemy extends Entity {
     }
 
 
-    public void checkFollowing(Level level){
-        Circle pRad = new Circle(level.player.getShape().getCenterX(),level.player.getShape().getCenterY(),128);
-        if(shape.intersects(pRad)){
+    public void checkFollowing(Level level) {
+        Circle pRad = new Circle(level.player.getShape().getCenterX(), level.player.getShape().getCenterY(), 128);
+        if (shape.intersects(pRad)) {
             this.followingPlayer = true;
-        }else{
-            if(!followingPlayer)
+        } else {
+            if (!followingPlayer)
                 return;
             this.followingPlayer = false;
-            this.tx = (int)level.tower.getShape().getCenterX();
-            this.ty = (int)level.tower.getShape().getCenterY();
+            this.tx = (int) level.tower.getShape().getCenterX();
+            this.ty = (int) level.tower.getShape().getCenterY();
         }
     }
 
@@ -96,22 +106,22 @@ public class BasicEnemy extends Entity {
         if (e == null) {
             die(l);
         }
-        if (e instanceof EntityTower){
-            l.tower.health-=5;
+        if (e instanceof EntityTower) {
+            l.tower.health -= 5;
             die(l);
         }
 
-        if(e instanceof EntityPlayer){
-            l.player.health-=5;
+        if (e instanceof EntityPlayer) {
+            l.player.health -= 5;
             die(l);
         }
-        if (e instanceof EntityPlayerProjectile) {
+     /*   if (e instanceof EntityPlayerProjectile) {
             if (l.towerPower >= 100) {
                 l.towerPower = 100;
             } else
                 l.towerPower += 2;
-            l.money+=5;
+            l.money += 5;
             die(l);
-        }
+        }*/
     }
 }

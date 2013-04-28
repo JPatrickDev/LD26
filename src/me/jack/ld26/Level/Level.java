@@ -32,6 +32,8 @@ public class Level {
     public static int money = 0;
 
     public boolean slow = false;
+    public static int distractAmmo = 0;
+
     public Level() {
 
     }
@@ -46,10 +48,13 @@ public class Level {
     Image healthEnd = null;
 
     Animation tutorial = new Animation();
+
+
+    public Entity follow = null;
     public void init() {
         player = new EntityPlayer(400, 200);
         player.spawn();
-
+    follow = player;
         tower = new EntityTower(400 - 8, 300 - 8);
         tower.spawn();
         try {
@@ -152,7 +157,7 @@ public class Level {
         for (int i = 0; i <= toSpawn; i++) {
             x = new Random().nextInt(700) + 16;
             y = new Random().nextInt(500) + 16;
-            BasicEnemy e = new BasicEnemy(x, y, (int) tower.getX() + 16, (int) tower.getY() + 16);
+            BasicEnemy e = new BasicEnemy(x, y, (int) tower.getX() + 16, (int) tower.getY() + 16,follow);
 
             addEntity(e);
            // addEntity(new BasicEnemy(x, y, (int)    player.getX() + 16, (int) player.getY() + 16));
@@ -173,8 +178,16 @@ public class Level {
             if (move instanceof BasicEnemy && e instanceof BasicEnemy) {
                 continue;
             }
+            if(e instanceof DistractionBomb && move instanceof EntityPlayerProjectile)
+                continue;
+
+
+
             if (e.getShape().intersects(move.getShape())) {
                 move.collide(e, this);
+                if(move instanceof  EntityPlayerProjectile && e instanceof BasicEnemy){
+                    return true;
+                }
                 return false;
             }
         }
@@ -212,5 +225,16 @@ public class Level {
 
     public void removeEntity(Entity e) {
         entitys.remove(e);
+    }
+
+    public void updateFollow() {
+        System.out.println("Following: " + this.follow.getClass().getCanonicalName());
+        for(Entity e : this.entitys){
+            if(e instanceof BasicEnemy){
+                BasicEnemy b = (BasicEnemy)e;
+                b.following = this.follow;
+            }
+        }
+
     }
 }
