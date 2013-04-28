@@ -2,6 +2,7 @@ package me.jack.ld26.Level;
 
 import me.jack.ld26.Entity.*;
 import me.jack.ld26.Powerup.Powerup;
+import me.jack.ld26.States.ShopState;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
@@ -92,14 +93,14 @@ public class Level {
         g.setColor(Color.white);
 
         g.setColor(Color.green);
-        g.drawString("Money: " + money, 20, 70);
+        g.drawImage(ShopState.m,20,70);
+        g.drawString(money + "", 52, 80);
         g.setColor(Color.white);
 
     }
 
     public void update(GameContainer arg0) {
-    if(slow)
-        System.out.println("Slow");
+
         player.update(this, arg0);
         for (Entity e : entitys) {
             e.update(this, arg0);

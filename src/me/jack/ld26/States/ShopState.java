@@ -28,7 +28,7 @@ public class ShopState extends BasicGameState {
     PowerUpSlot[] slots = new PowerUpSlot[perRow*rows];
     Rectangle[] collisions = new Rectangle[perRow
             *rows];
-    Image m  = null;
+   public static Image m  = null;
     Font f;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
