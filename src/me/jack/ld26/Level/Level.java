@@ -45,6 +45,7 @@ public class Level {
 
     Image healthEnd = null;
 
+    Animation tutorial = new Animation();
     public void init() {
         player = new EntityPlayer(400, 200);
         player.spawn();
@@ -58,6 +59,12 @@ public class Level {
             towerPowerAnim = new Animation();
             towerPowerAnim.addFrame(sheet.getSprite(0,0),500);
             towerPowerAnim.addFrame(sheet.getSprite(1,0),500);
+
+            tutorial.setLooping(false);
+            tutorial.addFrame(new Image("/res/tutorial/1.png"),4000);
+            tutorial.addFrame(new Image("/res/tutorial/2.png"),3000);
+            tutorial.addFrame(new Image("/res/tutorial/3.png"),3000);
+
         } catch (SlickException e) {
             e.printStackTrace();
         }
@@ -96,6 +103,10 @@ public class Level {
         g.drawImage(ShopState.m,20,70);
         g.drawString(money + "", 52, 80);
         g.setColor(Color.white);
+
+        if(!tutorial.isStopped()){
+            tutorial.draw(0,0);
+        }
 
     }
 
