@@ -10,6 +10,6 @@ public class LD26{
 
 
     public static void main(String[] args){
-        JEngine.start(new LD26Game("LD26 - Theme: Minimalism"),800,600);
+        JEngine.start(new LD26Game("LD26 - Allied  - Theme: Minimalism"),800,600);
     }
 }

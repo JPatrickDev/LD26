@@ -2,10 +2,7 @@ package me.jack.ld26.States;
 
 import me.jack.ld26.Level.Level;
 import org.lwjgl.input.Mouse;
-import org.newdawn.slick.Color;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
@@ -19,12 +16,16 @@ import java.util.ArrayList;
 public class DifficultySelectState extends BasicGameState {
 
 
+    Image logo = null;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
+
+        logo = new Image("/res/logo.png");
+
         int x = 0;
         int y = 0;
-        int   width = gameContainer.getGraphics().getFont().getWidth("Please select your difficulty:");
-        x = (gameContainer.getWidth() / 2) - (gameContainer.getGraphics().getFont().getWidth("Please select your difficulty:") / 2);
+        int   width = gameContainer.getGraphics().getFont().getWidth("Please select your level of difficulty:");
+        x = (gameContainer.getWidth() / 2) - (gameContainer.getGraphics().getFont().getWidth("Please select your level of difficulty:") / 2);
         y = 50;
     //y+=64;
 
@@ -52,7 +53,8 @@ public class DifficultySelectState extends BasicGameState {
 
     @Override
     public void render(GameContainer gameContainer, StateBasedGame stateBasedGame, Graphics graphics) throws SlickException {
-        graphics.drawString("Please select your difficulty:", x, y);
+        graphics.drawImage(logo,0,0);
+        graphics.drawString("Please select your level of difficulty:", x, y);
 
         graphics.setColor(Color.gray);
         y += 64;

@@ -12,13 +12,15 @@ public class SlowDownPowerup extends Powerup{
     public void use(final Level level) {
         if(level.towerPower != 100)
             return;
+
+        level.towerPower = 0;
     level.slow  = true;
         new Thread(new Runnable(){
 
             @Override
             public void run() {
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

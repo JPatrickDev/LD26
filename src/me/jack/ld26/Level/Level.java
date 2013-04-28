@@ -67,7 +67,7 @@ public class Level {
             towerPowerAnim.addFrame(sheet.getSprite(1, 0), 500);
 
             tutorial.setLooping(false);
-            tutorial.addFrame(new Image("/res/tutorial/1.png"), 4000);
+            tutorial.addFrame(new Image("/res/tutorial/1.png"), 5000);
             tutorial.addFrame(new Image("/res/tutorial/2.png"), 3000);
             tutorial.addFrame(new Image("/res/tutorial/3.png"), 3000);
 
@@ -112,18 +112,14 @@ public class Level {
 
         if (!tutorial.isStopped()) {
             tutorial.draw(0, 0);
-        }else{
-            p = false;
         }
 
     }
 
-    boolean p = true;
 
     public void update(GameContainer arg0) {
-    if(p)
-        return;
-        System.out.println(timeTillEnd);
+
+
         player.update(this, arg0);
         for (Entity e : entitys) {
             e.update(this, arg0);

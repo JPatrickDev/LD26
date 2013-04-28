@@ -86,7 +86,8 @@ public class ShopState extends BasicGameState {
         graphics.setColor(Color.gray);
         graphics.fillRect(672,30,128,32);
         graphics.setColor(Color.white);
-        graphics.drawString("Back",672 + 64,10+32);
+        graphics.drawString("Back",672,10+16);
+        graphics.drawString("Balance: " + Level.money,600,10+64);
     }
 
     @Override
@@ -118,6 +119,8 @@ public class ShopState extends BasicGameState {
                         else{
                             Level.distractAmmo+=5;
                         }
+                    }else{
+                        SoundEngine.getInstance().play("nope");
                     }
                 }
                 i++;

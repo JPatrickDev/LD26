@@ -36,7 +36,7 @@ public class GameOver extends BasicGameState{
         graphics.drawImage(bg,0,0);
 
         graphics.drawString("You survived " + seconds + " seconds!",50,276);
-        graphics.drawString("You reached round " + levelReached,50,300);
+        graphics.drawString("You reached Round " + levelReached,50,300);
         graphics.drawString("Thank you for playing!",50,330);
         graphics.drawString("Game made by Jack Patrick (@jack_patrickXx) for LD26",50,360);
     }

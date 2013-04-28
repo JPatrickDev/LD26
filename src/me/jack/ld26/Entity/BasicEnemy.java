@@ -48,7 +48,7 @@ public class BasicEnemy extends Entity {
         if (level.slow)
             moveSpeed = 1;
         else
-            moveSpeed = 1;
+            moveSpeed = 2;
         if (x > tx) {
             xMove = -moveSpeed;
         } else if (x < tx) {
