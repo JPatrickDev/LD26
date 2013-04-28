@@ -10,6 +10,8 @@ public class SlowDownPowerup extends Powerup{
 
     @Override
     public void use(final Level level) {
+        if(level.towerPower != 100)
+            return;
     level.slow  = true;
         new Thread(new Runnable(){
 

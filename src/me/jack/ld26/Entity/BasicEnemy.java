@@ -110,6 +110,7 @@ public class BasicEnemy extends Entity {
                 l.towerPower = 100;
             } else
                 l.towerPower += 2;
+            l.money+=5;
             die(l);
         }
     }

@@ -26,7 +26,7 @@ public class EntityTower extends Entity {
 
     int shownFor = 0;
 
-    boolean AOE = false;
+    public boolean AOE = false;
     float AOERadius = 0.0f;
     public Circle AOEShape = null;
 
@@ -74,12 +74,6 @@ public class EntityTower extends Entity {
             }
         }
 
-        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
-           if(level.towerPower == 100){
-                level.towerPower = 0;
-                AOE = true;
-           }
-        }
     }
 
 

@@ -1,9 +1,12 @@
 package me.jack.ld26.Level;
 
 import me.jack.ld26.Entity.*;
+import me.jack.ld26.Powerup.Powerup;
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.*;
 import org.newdawn.slick.geom.Rectangle;
 
+import java.awt.KeyboardFocusManager;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -20,10 +23,12 @@ public class Level {
 
     public EntityTower tower;
 
+    public static Powerup current = null;
 
     public int towerPower =0;
 
 
+    public static int money = 0;
 
     public boolean slow = false;
     public Level() {
@@ -85,6 +90,11 @@ public class Level {
         g.fillRect(20,60,player.health,5);
         g.drawImage(healthEnd,20+player.health,60);
         g.setColor(Color.white);
+
+        g.setColor(Color.green);
+        g.drawString("Money: " + money, 20, 70);
+        g.setColor(Color.white);
+
     }
 
     public void update(GameContainer arg0) {
@@ -101,7 +111,12 @@ public class Level {
       tower.update(this, arg0);
 
         checkLevel(arg0);
-
+        if(Keyboard.isKeyDown(Keyboard.KEY_SPACE)){
+            if(current != null){
+                current.use(this);
+                current = null;
+            }
+        }
     }
 
     public void checkLevel(GameContainer arg0) {

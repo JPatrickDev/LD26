@@ -1,6 +1,8 @@
 package me.jack.ld26.States;
 
 import me.jack.ld26.LD26Game;
+import me.jack.ld26.Level.Level;
+import me.jack.ld26.Powerup.AOEPowerUp;
 import me.jack.ld26.Powerup.PowerUpSlot;
 import me.jack.ld26.Powerup.SlowDownPowerup;
 import org.newdawn.slick.*;
@@ -24,12 +26,30 @@ public class ShopState extends BasicGameState {
     int rows = 4;
 
     PowerUpSlot[] slots = new PowerUpSlot[perRow*rows];
+    Rectangle[] collisions = new Rectangle[perRow
+            *rows];
     Image m  = null;
     Font f;
     @Override
     public void init(GameContainer gameContainer, StateBasedGame stateBasedGame) throws SlickException {
             slots[0] = new PowerUpSlot("/res/powerups/slow.png",new SlowDownPowerup());
+            slots[1] = new PowerUpSlot("/res/powerups/aoe.png",new AOEPowerUp());
+        int i  =0;
 
+        int x = 132;
+        int y = 132;
+        for(PowerUpSlot s : slots){
+            if(s!= null){
+                collisions[i] = new Rectangle(x,y,128,200);
+                x+=130;
+                if(i == perRow){
+                    y+=200+15;
+                    x = 132;
+                }
+            i++;
+            }else
+                break;
+        }
         m = new Image("/res/money.png");
 
 
@@ -52,18 +72,14 @@ public class ShopState extends BasicGameState {
             slot.draw(graphics,x,y);
             graphics.drawImage(m, x, y + 200);
             graphics.drawString(slot.p.getCost() + "",x + 33,y+200);
-            x+=128;
+            x+=130;
 
             i++;
             if(i == perRow){
                 y+=200+15;
                 x = 132;
             }
-
-
-
         }
-
         graphics.setColor(Color.gray);
         graphics.fillRect(672,30,128,32);
         graphics.setColor(Color.white);
@@ -85,6 +101,20 @@ public class ShopState extends BasicGameState {
             if(backButton.contains(x,y)){
                back = true;
             }
+            int i = 0;
+            for(Rectangle r : collisions){
+                if(r == null)break;
+                if(r.contains(x,y)){
+                    PowerUpSlot slot = slots[i];
+                    if(Level.money >= slot.p.getCost()){
+                        Level.money-=slot.p.getCost();
+                    Level.current = slot.p;
+                    }
+                }
+                i++;
+
+            }
+
         }
 
     }
